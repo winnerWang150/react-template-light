@@ -5,9 +5,7 @@ import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
     fetchHome.fetchGoodPriceData().then(res => {
         dispatch(changeGoodPriceInfoAction(res))
     })
-
-//   const res = await fetchHome.fetchGoodPriceData()
-//   return res
+    // return res 
 })
 
 const fetchHighScoreInfoAction =  createAsyncThunk('home/fetchHighScore', (payload, {dispatch}) => {
@@ -15,35 +13,8 @@ const fetchHighScoreInfoAction =  createAsyncThunk('home/fetchHighScore', (paylo
   fetchHome.fetchHighScoreData().then(res => {
     dispatch(changeHighScoreInfoAction(res))
   })
-//   const res = await fetchHome.fetchHighScoreData()
-//   return res
 })
 
-const fetchHomeDiscountAction =  createAsyncThunk('home/fetchDiscount', (payload, {dispatch}) => {
-    fetchHome.fetchHomeDiscount().then(res => {
-        dispatch(changeDiscountInfoAction(res))
-    })
-//   const res = await fetchHome.fetchHomeDiscount()
-//   return res
-})
-
-const fetchHomeHotRecommendDestAction = createAsyncThunk('home/fetchHotRecommendDest', async (payload, store) => {
-  const res = await fetchHome.fetchHomeHotRecommendDest()
-  return res
-})
-
-const fetchHomeLongforAction = createAsyncThunk('/home/fetchLongfor', (payload, {dispatch}) => {
-    fetchHome.fetchLongForData().then(res => {
-        dispatch(changeLongforAction(res))
-    })
-//   const res = await fetchHome.fetchLongForData()
-//   return res
-})
-
-const fetchHomePlusAction = createAsyncThunk('/home/fetchHomePlus', async () => {
-  const res = await fetchHome.fetchHomePlusData()
-  return res
-})
 
 const homeSlice = createSlice({
   name: 'home',
@@ -58,22 +29,11 @@ const homeSlice = createSlice({
   reducers: {
     changeGoodPriceInfoAction (state, {payload}) {
       state.goodPriceInfo = payload
+   
     },
     changeHighScoreInfoAction (state, {payload}) {
       state.highScoreInfo = payload
-    },
-    changeDiscountInfoAction (state, {payload}) {
-      state.discountInfo = payload
-    },
-    changeHotRecommendDestInfoAction (state, {payload}) {
-      state.initialState = payload
-    },
-    changeLongforAction (state, {payload}) {
-      state.longforInfo = payload
-    },
-    changeHomePlusAction (state, {payload}) {
-      state.homePlusInfo = payload
-    } 
+    }
   },
   extraReducers: {
     // [fetchGoodPriceAction.fulfilled] (state, {payload}) {
@@ -81,24 +41,12 @@ const homeSlice = createSlice({
     // },
     // [fetchHighScoreInfoAction.fulfilled] (state, {payload}) {
     //   state.highScoreInfo = payload
-    // },
-    // [fetchHomeDiscountAction.fulfilled] (state, {payload}) {
-    //   state.discountInfo = payload
-    // },
-    [fetchHomeHotRecommendDestAction.fulfilled] (state, {payload}) {
-      state.hotRecommendDestInfo = payload
-    },
-    // [fetchHomeLongforAction.fulfilled] (state, {payload}) {
-    //   state.longforInfo = payload
-    // },
-    [fetchHomePlusAction.fulfilled] (state, {payload}) {
-      state.homePlusInfo = payload
-    }
+    // }
   }
 })
 
-export const {changeGoodPriceInfoAction, changeHighScoreInfoAction, changeDiscountInfoAction, changeHotRecommendDestInfoAction, changeLongforAction, changeHomePlusAction} = homeSlice.actions
+export const {changeGoodPriceInfoAction, changeHighScoreInfoAction} = homeSlice.actions
 
-export {fetchGoodPriceAction, fetchHighScoreInfoAction, fetchHomeDiscountAction, fetchHomeHotRecommendDestAction, fetchHomeLongforAction, fetchHomePlusAction} 
+export {fetchGoodPriceAction, fetchHighScoreInfoAction} 
 
 export default homeSlice.reducer
